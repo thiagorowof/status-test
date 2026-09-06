@@ -1,3 +1,18 @@
 {
-  "incidentes": []
+  "incidentes": [
+    {
+      "origem": "automatico",
+      "componente": "dev-gdf-agendamento",
+      "titulo": "Gerenciador de Fila: Agendamento indisponível — Desenvolvimento",
+      "inicio": "2026-09-06T21:47:08.619Z",
+      "ultimoMotivo": "nao respondeu",
+      "atualizacoes": [
+        {
+          "situacao": "Detectado",
+          "texto": "A verificação automática falhou 2 vezes seguidas. Motivo relatado: nao respondeu.",
+          "quando": "2026-09-06T23:01:18.672Z"
+        }
+      ]
+    }
+  ]
 }
