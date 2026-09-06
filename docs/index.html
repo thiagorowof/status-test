@@ -278,11 +278,13 @@
       (passos ? '<ol>' + passos + '</ol>' : '') + '</div>';
   }
 
-  // cache-busting: o JSON muda a cada meia hora e o CDN do Pages guarda bem
-  var agora = Date.now();
-
+  /**
+   * Cache-busting com o instante da chamada, e não com o do carregamento da
+   * página: com um valor fixo, toda releitura devolveria a cópia guardada pelo
+   * CDN do Pages e a atualização automática não atualizaria nada.
+   */
   function baixar(arquivo) {
-    return fetch(arquivo + '?t=' + agora)
+    return fetch(arquivo + '?t=' + Date.now())
       .then(function (r) { return r.json(); })
       .catch(function () { return null; });
   }
@@ -295,15 +297,27 @@
    * mede disponibilidade e não enxerga lentidão, que é justamente o caso em que
    * alguém publica um incidente à mão.
    */
-  Promise.all([baixar('status.json'), baixar('incidentes.json')]).then(function (res) {
+  var jaRenderizou = false;
+
+  function atualizar() {
+    return Promise.all([baixar('status.json'), baixar('incidentes.json')]).then(function (res) {
     var d = res[0];
     var todosIncidentes = res[1] && res[1].incidentes;
 
-    renderizarIncidentes(todosIncidentes, d);
+    // Falha numa releitura NÃO pode apagar uma página boa. Antes da atualização
+    // automática isso só acontecia no carregamento, onde não havia o que
+    // preservar; agora uma oscilação de rede de dois segundos substituiria o
+    // estado inteiro por uma mensagem de erro — e a pessoa concluiria que o
+    // sistema caiu, quando quem falhou foi o navegador dela.
     if (!d) {
-      document.getElementById('faixa-titulo').textContent = 'Não foi possível carregar o status';
+      if (!jaRenderizou) {
+        renderizarIncidentes(todosIncidentes, d);
+        document.getElementById('faixa-titulo').textContent = 'Não foi possível carregar o status';
+      }
       return;
     }
+    jaRenderizou = true;
+    renderizarIncidentes(todosIncidentes, d);
 
     document.getElementById('titulo').textContent = d.titulo || 'Status';
     document.getElementById('subtitulo').textContent = d.subtitulo || '';
@@ -358,9 +372,59 @@
 
     if (d.janela) {
       document.getElementById('janela').textContent =
-        'Verificações entre ' + d.janela.inicio + 'h e ' + d.janela.fim + 'h (horário de Brasília).';
+        'Verificações entre ' + d.janela.inicio + 'h e ' + d.janela.fim +
+        'h (horário de Brasília). Esta página se atualiza sozinha a cada minuto.';
     }
+    });
+  }
+
+  /* ------------------------------------------------- atualização automática
+   *
+   * A página lia os arquivos uma vez, no carregamento, e nunca mais. Quem
+   * deixasse a aba aberta durante uma queda via o "há 3 min" congelado para
+   * sempre — e o momento em que a página mais fica aberta é exatamente esse.
+   *
+   * Releitura a cada minuto, **só com a aba visível**. Aba escondida não
+   * atualiza: ninguém está lendo, e o navegador já estrangula temporizador em
+   * segundo plano, o que faria o intervalo ser impreciso além de inútil.
+   *
+   * Ao voltar para a aba, atualiza na hora em vez de esperar o próximo ciclo.
+   * É o caso mais comum de todos: a pessoa troca de janela, volta dez minutos
+   * depois e quer ver o estado de agora, não o de quando saiu.
+   */
+  var INTERVALO_MS = 60000;
+
+  /**
+   * Piso entre duas leituras. Serve só para o caso de o retorno à aba coincidir
+   * com o tique do intervalo — sem ele seriam duas requisições coladas.
+   *
+   * É pequeno de propósito: uma guarda do tamanho do intervalo adiaria o ciclo
+   * regular em até um minuto inteiro a cada vez que alguém voltasse para a aba,
+   * o que transformaria a cadência de um minuto em dois na prática.
+   */
+  var MINIMO_ENTRE_LEITURAS_MS = 5000;
+  var ultimaLeitura = 0;
+
+  function atualizarSeVisivel() {
+    if (document.visibilityState !== 'visible') return;
+    if (Date.now() - ultimaLeitura < MINIMO_ENTRE_LEITURAS_MS) return;
+    ultimaLeitura = Date.now();
+    atualizar();
+  }
+
+  setInterval(atualizarSeVisivel, INTERVALO_MS);
+
+  document.addEventListener('visibilitychange', function () {
+    // Só ao voltar. Ao sair não há o que fazer — e é justamente o que evita o
+    // trabalho em segundo plano.
+    if (document.visibilityState === 'visible') atualizarSeVisivel();
   });
+
+  // Rede que volta é o outro momento em que o dado na tela certamente envelheceu.
+  window.addEventListener('online', atualizarSeVisivel);
+
+  ultimaLeitura = Date.now();
+  atualizar();
 
   /**
    * A janela vem do status.json, a mesma das barras de 90 dias. Antes o texto
