@@ -1,6 +1,6 @@
 {
-  "titulo": "Status — Assistência Técnica",
-  "subtitulo": "Ambientes do ADI",
+  "titulo": "Status — Sistemas Informata",
+  "subtitulo": "Assistência Técnica e Gerenciador de Fila",
   "fusoHorario": "America/Sao_Paulo",
   "janela": {
     "inicio": 7,
@@ -22,6 +22,7 @@
         {
           "id": "dev-web",
           "idAnterior": "adi-web",
+          "sistema": "Assistência Técnica",
           "nome": "Aplicação web",
           "descricao": "A tela que o usuário abre no navegador",
           "url": "${STATUS_URL_DEV_WEB}",
@@ -31,10 +32,47 @@
         {
           "id": "dev-api",
           "idAnterior": "adi-api",
+          "sistema": "Assistência Técnica",
           "nome": "API",
           "descricao": "Serviço que atende o sistema de assistência técnica",
           "url": "${STATUS_URL_DEV_API}",
           "tipo": "health"
+        },
+        {
+          "id": "dev-gdf-agendamento",
+          "sistema": "Gerenciador de Fila",
+          "nome": "Agendamento",
+          "descricao": "Onde o cliente agenda o atendimento",
+          "url": "${STATUS_URL_GDF_DEV_AGENDAMENTO}",
+          "tipo": "conteudo",
+          "contem": "<app-root"
+        },
+        {
+          "id": "dev-gdf-presencial",
+          "sistema": "Gerenciador de Fila",
+          "nome": "Atendimento presencial",
+          "descricao": "Retirada de senha na unidade",
+          "url": "${STATUS_URL_GDF_DEV_PRESENCIAL}",
+          "tipo": "conteudo",
+          "contem": "<app-root"
+        },
+        {
+          "id": "dev-gdf-atendentes",
+          "sistema": "Gerenciador de Fila",
+          "nome": "Atendentes",
+          "descricao": "Tela de quem chama a próxima senha",
+          "url": "${STATUS_URL_GDF_DEV_ATENDENTES}",
+          "tipo": "conteudo",
+          "contem": "<info-root"
+        },
+        {
+          "id": "dev-gdf-api",
+          "sistema": "Gerenciador de Fila",
+          "nome": "API",
+          "descricao": "Serviço que distribui as senhas",
+          "url": "${STATUS_URL_GDF_DEV_API}",
+          "tipo": "health",
+          "monitorar": false
         }
       ]
     },
@@ -46,6 +84,7 @@
       "componentes": [
         {
           "id": "qa-web",
+          "sistema": "Assistência Técnica",
           "nome": "Aplicação web",
           "descricao": "A tela que o usuário abre no navegador",
           "url": "${STATUS_URL_QA_WEB}",
@@ -54,6 +93,7 @@
         },
         {
           "id": "qa-api",
+          "sistema": "Assistência Técnica",
           "nome": "API",
           "descricao": "Serviço que atende o sistema de assistência técnica",
           "url": "${STATUS_URL_QA_API}",
@@ -69,6 +109,7 @@
       "componentes": [
         {
           "id": "prod-web",
+          "sistema": "Assistência Técnica",
           "nome": "Aplicação web",
           "descricao": "A tela que o usuário abre no navegador",
           "url": "${STATUS_URL_PROD_WEB}",
@@ -77,9 +118,27 @@
         },
         {
           "id": "prod-api",
+          "sistema": "Assistência Técnica",
           "nome": "API",
           "descricao": "Serviço que atende o sistema de assistência técnica",
           "url": "${STATUS_URL_PROD_API}",
+          "tipo": "health"
+        },
+        {
+          "id": "prod-gdf-web",
+          "sistema": "Gerenciador de Fila",
+          "nome": "Retirada de senha",
+          "descricao": "A tela pública de retirada de senha",
+          "url": "${STATUS_URL_GDF_PROD_WEB}",
+          "tipo": "conteudo",
+          "contem": "<app-root"
+        },
+        {
+          "id": "prod-gdf-api",
+          "sistema": "Gerenciador de Fila",
+          "nome": "API",
+          "descricao": "Serviço que distribui as senhas",
+          "url": "${STATUS_URL_GDF_PROD_API}",
           "tipo": "health"
         }
       ]

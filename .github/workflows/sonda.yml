@@ -53,6 +53,13 @@ jobs:
           STATUS_URL_QA_WEB:    ${{ secrets.STATUS_URL_QA_WEB }}
           STATUS_URL_QA_API:    ${{ secrets.STATUS_URL_QA_API }}
           STATUS_URL_PROD_WEB:  ${{ secrets.STATUS_URL_PROD_WEB }}
+          # Gerenciador de Fila
+          STATUS_URL_GDF_DEV_AGENDAMENTO: ${{ secrets.STATUS_URL_GDF_DEV_AGENDAMENTO }}
+          STATUS_URL_GDF_DEV_PRESENCIAL:  ${{ secrets.STATUS_URL_GDF_DEV_PRESENCIAL }}
+          STATUS_URL_GDF_DEV_ATENDENTES:  ${{ secrets.STATUS_URL_GDF_DEV_ATENDENTES }}
+          STATUS_URL_GDF_DEV_API:         ${{ secrets.STATUS_URL_GDF_DEV_API }}
+          STATUS_URL_GDF_PROD_WEB:        ${{ secrets.STATUS_URL_GDF_PROD_WEB }}
+          STATUS_URL_GDF_PROD_API:        ${{ secrets.STATUS_URL_GDF_PROD_API }}
           STATUS_URL_PROD_API:  ${{ secrets.STATUS_URL_PROD_API }}
 
       - name: Publicar o resultado

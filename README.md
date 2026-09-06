@@ -34,10 +34,13 @@ Trocar de hospedagem depois é copiar arquivos e apontar para o mesmo arquivo.
 
    | Segredo | Valor |
    |---|---|
-   | `STATUS_URL_DEV_WEB` | endereço da aplicação web de dev |
-   | `STATUS_URL_DEV_API` | endereço da API de dev, terminando em `/health/ready` |
-   | `STATUS_URL_QA_WEB` / `STATUS_URL_QA_API` | idem, homologação — só quando for ligar |
-   | `STATUS_URL_PROD_WEB` / `STATUS_URL_PROD_API` | idem, produção — só quando for ligar |
+   | `STATUS_URL_DEV_WEB` | Assistência Técnica: aplicação web de dev |
+   | `STATUS_URL_DEV_API` | Assistência Técnica: API de dev, terminando em `/health/ready` |
+   | `STATUS_URL_GDF_DEV_AGENDAMENTO` | Gerenciador de Fila: tela de agendamento |
+   | `STATUS_URL_GDF_DEV_PRESENCIAL` | Gerenciador de Fila: atendimento presencial |
+   | `STATUS_URL_GDF_DEV_ATENDENTES` | Gerenciador de Fila: tela dos atendentes |
+   | `STATUS_URL_GDF_DEV_API` | Gerenciador de Fila: API, terminando em `/health/ready` |
+   | `STATUS_URL_QA_*` / `STATUS_URL_PROD_*` | homologação e produção — só quando forem ligados |
 
 3. Envie estes arquivos para o repositório.
 
@@ -64,16 +67,33 @@ A página fica em `https://<usuario>.github.io/<repositorio>/`.
 
 **No ar hoje:** https://thiagorowof.github.io/status-test/
 
-## Ambientes
+## Sistemas e ambientes
 
-A página mostra os três ambientes. Só **desenvolvimento** está sendo verificado;
-QA e produção aparecem como *Não monitorado* até serem ligados.
+A página cobre **dois sistemas** em três ambientes. O agrupamento é ambiente
+primeiro, sistema depois: quem abre a página quer saber se produção está de pé,
+e só então de qual sistema. Com um sistema só num ambiente, o cabeçalho do
+sistema é omitido — ele não acrescentaria nada.
 
-| Ambiente | Componentes | Situação |
+| Ambiente | Assistência Técnica | Gerenciador de Fila |
 |---|---|---|
-| Desenvolvimento | Aplicação web, API | ✅ sendo verificado |
-| Homologação | Aplicação web, API | desligado |
-| Produção | Aplicação web, API | desligado |
+| Desenvolvimento | Aplicação web, API | Agendamento, Atendimento presencial, Atendentes, API¹ |
+| Homologação | Aplicação web, API | — |
+| Produção | Aplicação web, API | Retirada de senha, API |
+
+¹ desligada por enquanto: o `/health/ready` do gerenciador só existe depois da
+publicação da telemetria. Ligar antes pintaria a página de vermelho por causa de
+uma rota que ainda não existe — que foi o alarme falso do primeiro dia desta
+página.
+
+### Desligar um componente sozinho
+
+`monitorar` funciona no ambiente **e** no componente. É o que permite ter três
+telas do gerenciador sendo verificadas em desenvolvimento enquanto a API dele
+espera a publicação, sem desligar o ambiente inteiro nem inventar uma queda.
+
+```json
+{ "id": "dev-gdf-api", "sistema": "Gerenciador de Fila", "monitorar": false, "…": "…" }
+```
 
 ### Os endereços
 

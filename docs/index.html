@@ -47,6 +47,11 @@
                    text-transform:uppercase;padding:3px 9px;border-radius:20px;
                    border:1px solid currentColor}
   .desc-amb{color:var(--fraca);font-size:13px;margin:0 0 12px}
+  /* sistema dentro do ambiente: com dois sistemas, a lista plana vira seis
+     linhas sem hierarquia e ninguém acha o que procura */
+  .sistema{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+           color:var(--fraca);margin:14px 0 7px}
+  .sistema:first-of-type{margin-top:0}
   /* ambiente ainda não ligado fica visivelmente de lado, sem sumir da página:
      ele existe para mostrar o que falta configurar */
   .ambiente.inativo .componente{opacity:.65;border-style:dashed}
@@ -221,13 +226,39 @@
       '</div>';
   }
 
+  /**
+   * Componentes agrupados por sistema, preservando a ordem em que aparecem no
+   * config — nada de ordenar por nome, que faria a página se reorganizar
+   * sozinha quando um sistema fosse renomeado.
+   *
+   * Sem `sistema` declarado, o componente sai solto e sem cabeçalho: é o caso
+   * de uma configuração antiga, e inventar um rótulo seria pior que omitir.
+   */
+  function porSistema(componentes) {
+    var ordem = [];
+    var grupos = {};
+    (componentes || []).forEach(function (c) {
+      var chave = c.sistema || '';
+      if (!(chave in grupos)) { grupos[chave] = []; ordem.push(chave); }
+      grupos[chave].push(c);
+    });
+
+    // Um sistema só: o cabeçalho não acrescenta nada e vira ruído.
+    var umSo = ordem.length === 1;
+
+    return ordem.map(function (chave) {
+      var cabecalho = (chave && !umSo) ? '<div class="sistema">' + esc(chave) + '</div>' : '';
+      return cabecalho + grupos[chave].map(componente).join('');
+    }).join('');
+  }
+
   function ambiente(a) {
     var r = ROTULO[a.geral] || { texto: 'Sem dados', classe: 'nulo' };
     return '<section class="ambiente' + (a.geral === 'pendente' ? ' inativo' : '') + '">' +
       '<div class="cab-amb"><h2>' + esc(a.nome) + '</h2>' +
         '<span class="pilula e-' + r.classe + '">' + esc(r.texto) + '</span></div>' +
       (a.descricao ? '<p class="desc-amb">' + esc(a.descricao) + '</p>' : '') +
-      (a.componentes || []).map(componente).join('') +
+      porSistema(a.componentes) +
       '</section>';
   }
 
@@ -306,7 +337,10 @@
 
     var detalhe;
     if (afetado) {
-      detalhe = afetado.ambiente + ' — ' + afetado.componente.nome + ', ' + desde(afetado.componente.desde);
+      // O sistema entra aqui pelo mesmo motivo que entra no incidente: com dois
+      // sistemas na página, "API, há 3 min" não diz qual API.
+      var c = afetado.componente;
+      detalhe = afetado.ambiente + ' — ' + (c.sistema ? c.sistema + ': ' : '') + c.nome + ', ' + desde(c.desde);
     } else if (abertos.length) {
       detalhe = abertos[0].titulo + (abertos.length > 1 ? ' e mais ' + (abertos.length - 1) : '');
     } else if (d.geral === 'pendente') {

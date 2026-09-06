@@ -55,9 +55,20 @@ function resolverVariaveis(texto, avisar) {
   });
 }
 
+/**
+ * Um componente pode ser desligado sozinho, sem desligar o ambiente inteiro.
+ *
+ * Existe para o caso concreto de um sistema entrar antes do outro: as telas do
+ * gerenciador já respondem em desenvolvimento, mas a API dele só terá
+ * `/health/ready` depois da publicação da telemetria. Sem o desligamento por
+ * componente, ou o ambiente inteiro ficaria pendente, ou a página mostraria
+ * queda por uma rota que ainda não existe — que foi exatamente o alarme falso
+ * do primeiro dia desta página.
+ */
+const ligado = (amb, c) => amb.monitorar !== false && c.monitorar !== false;
+
 (cfg.ambientes || []).forEach((amb) => {
-  const ligado = amb.monitorar !== false;
-  (amb.componentes || []).forEach((c) => { c.url = resolverVariaveis(c.url, ligado); });
+  (amb.componentes || []).forEach((c) => { c.url = resolverVariaveis(c.url, ligado(amb, c)); });
 });
 
 /* ------------------------------------------------------------ janela horária */
@@ -318,7 +329,9 @@ function atualizarIncidentes(anteriores, ambientes, agora) {
           lista.push({
             origem: 'automatico',
             componente: c.id,
-            titulo: `${c.nome} indisponível — ${amb.nome}`,
+            // Com dois sistemas na mesma página, "API indisponível —
+            // Desenvolvimento" não diz qual API. O sistema entra no título.
+            titulo: `${c.sistema ? c.sistema + ': ' : ''}${c.nome} indisponível — ${amb.nome}`,
             // O início é quando o estado virou, não quando o limiar foi
             // atingido: a interrupção começou na primeira falha, e datá-la
             // meia hora depois encurtaria a duração registrada.
@@ -412,7 +425,7 @@ function pior(estados) {
       // diferença entre os dois casos importa para quem configura: o primeiro é
       // decisão, o segundo é configuração faltando.
       let r;
-      if (!amb.monitorar) {
+      if (!ligado(amb, c)) {
         r = { estado: 'pendente', ms: null, detalhe: null };
       } else if (!c.url) {
         r = { estado: 'pendente', ms: null, detalhe: 'URL nao configurada' };
@@ -432,6 +445,10 @@ function pior(estados) {
 
       componentes.push({
         id: c.id,
+        // Sistema a que o componente pertence. A página agrupa por ele dentro de
+        // cada ambiente: dois sistemas numa lista só viram seis linhas sem
+        // hierarquia, e ninguém acha o que procura.
+        sistema: c.sistema || null,
         nome: c.nome,
         descricao: c.descricao,
         estado: r.estado,
