@@ -76,14 +76,14 @@ sistema é omitido — ele não acrescentaria nada.
 
 | Ambiente | Assistência Técnica | Gerenciador de Fila |
 |---|---|---|
-| Desenvolvimento | Aplicação web, API | Agendamento, Atendimento presencial, Atendentes, API¹ |
+| Desenvolvimento | Aplicação web, API | Agendamento, Atendimento presencial, Atendentes, API |
 | Homologação | Aplicação web, API | — |
 | Produção | Aplicação web, API | Retirada de senha, API |
 
-¹ desligada por enquanto: o `/health/ready` do gerenciador só existe depois da
-publicação da telemetria. Ligar antes pintaria a página de vermelho por causa de
-uma rota que ainda não existe — que foi o alarme falso do primeiro dia desta
-página.
+Em produção, use `/api/health/ready` para a API do gerenciador. O nginx de lá
+proxia **apenas** `location /api/`; `/health/ready` cairia no `try_files` do
+Angular e devolveria a tela com HTTP 200 — o pior resultado possível para uma
+verificação de saúde, que concluiria "no ar" olhando para a página.
 
 ### Desligar um componente sozinho
 
