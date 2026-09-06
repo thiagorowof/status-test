@@ -21,11 +21,11 @@ jobs:
   verificar:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '24'
 
       # As URLs sondadas vivem em segredos, não no config.json: o repositório é
       # público (privado tem cota de minutos de Actions) e quem monitora não é
