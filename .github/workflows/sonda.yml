@@ -39,8 +39,14 @@ jobs:
       # `schedule` e `workflow_dispatch` rodam no contexto do próprio
       # repositório, então enxergam os segredos. Se um dia entrar gatilho por
       # `pull_request`, saiba que fork não recebe segredo.
+      #
+      # Execução manual ignora a janela horária. Quem clica em "Run workflow"
+      # está validando configuração, e nesse momento a resposta útil é o
+      # resultado da verificação — não "fora da janela, nada a fazer". O
+      # agendamento continua respeitando a janela, que existe para não gastar
+      # execução de madrugada.
       - name: Verificar os serviços
-        run: node sonda.js
+        run: node sonda.js ${{ github.event_name == 'workflow_dispatch' && '--forcar' || '' }}
         env:
           STATUS_URL_DEV_WEB:   ${{ secrets.STATUS_URL_DEV_WEB }}
           STATUS_URL_DEV_API:   ${{ secrets.STATUS_URL_DEV_API }}

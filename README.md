@@ -50,7 +50,10 @@ Trocar de hospedagem depois é copiar arquivos e apontar para o mesmo arquivo.
    `status.json` de volta no repositório.
 
 6. Rode uma vez na mão: aba **Actions → Sonda de status → Run workflow**.
-   Isso valida a configuração sem esperar meia hora.
+   Isso valida a configuração sem esperar meia hora, e funciona a qualquer hora
+   — execução manual ignora a janela de 7h–22h de propósito, porque quem está
+   validando configuração precisa do resultado da verificação, não de "fora da
+   janela, nada a fazer".
 
    Se um componente aparecer como *Não monitorado* com "URL nao configurada", o
    segredo correspondente está faltando ou com nome diferente. O log da execução
