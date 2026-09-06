@@ -1,0 +1,88 @@
+{
+  "titulo": "Status — Assistência Técnica",
+  "subtitulo": "Ambientes do ADI",
+  "fusoHorario": "America/Sao_Paulo",
+  "janela": {
+    "inicio": 7,
+    "fim": 22
+  },
+  "timeoutMs": 30000,
+  "diasDeHistorico": 90,
+  "incidenteAutomatico": {
+    "ativo": true,
+    "verificacoesParaAbrir": 2
+  },
+  "ambientes": [
+    {
+      "id": "dev",
+      "nome": "Desenvolvimento",
+      "descricao": "Onde o time valida antes de subir para QA",
+      "monitorar": true,
+      "componentes": [
+        {
+          "id": "dev-web",
+          "idAnterior": "adi-web",
+          "nome": "Aplicação web",
+          "descricao": "A tela que o usuário abre no navegador",
+          "url": "${STATUS_URL_DEV_WEB}",
+          "tipo": "conteudo",
+          "contem": "<app-root"
+        },
+        {
+          "id": "dev-api",
+          "idAnterior": "adi-api",
+          "nome": "API",
+          "descricao": "Serviço que atende o sistema de assistência técnica",
+          "url": "${STATUS_URL_DEV_API}",
+          "tipo": "health"
+        }
+      ]
+    },
+    {
+      "id": "qa",
+      "nome": "Homologação",
+      "descricao": "Onde o cliente valida antes da publicação",
+      "monitorar": false,
+      "componentes": [
+        {
+          "id": "qa-web",
+          "nome": "Aplicação web",
+          "descricao": "A tela que o usuário abre no navegador",
+          "url": "${STATUS_URL_QA_WEB}",
+          "tipo": "conteudo",
+          "contem": "<app-root"
+        },
+        {
+          "id": "qa-api",
+          "nome": "API",
+          "descricao": "Serviço que atende o sistema de assistência técnica",
+          "url": "${STATUS_URL_QA_API}",
+          "tipo": "health"
+        }
+      ]
+    },
+    {
+      "id": "prod",
+      "nome": "Produção",
+      "descricao": "O ambiente que os clientes usam",
+      "monitorar": false,
+      "componentes": [
+        {
+          "id": "prod-web",
+          "nome": "Aplicação web",
+          "descricao": "A tela que o usuário abre no navegador",
+          "url": "${STATUS_URL_PROD_WEB}",
+          "tipo": "conteudo",
+          "contem": "<app-root"
+        },
+        {
+          "id": "prod-api",
+          "nome": "API",
+          "descricao": "Serviço que atende o sistema de assistência técnica",
+          "url": "${STATUS_URL_PROD_API}",
+          "tipo": "health"
+        }
+      ]
+    }
+  ]
+}

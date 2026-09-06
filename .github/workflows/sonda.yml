@@ -1,0 +1,66 @@
+name: Sonda de status
+
+on:
+  schedule:
+    # A cada 30 minutos. O cron do GitHub é em UTC; a janela de 7h-22h de
+    # Brasília corresponde a 10h-01h UTC. A própria sonda confere a janela no
+    # fuso configurado, então isto aqui é só para não gastar execução à toa.
+    - cron: '*/30 10-23,0-1 * * *'
+  workflow_dispatch:        # permite rodar na mão pelo painel do GitHub
+
+# Necessário para o passo de commit conseguir escrever no repositório.
+permissions:
+  contents: write
+
+# Duas execuções simultâneas dariam conflito no commit do status.json.
+concurrency:
+  group: sonda
+  cancel-in-progress: false
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # As URLs sondadas vivem em segredos, não no config.json: o repositório é
+      # público (privado tem cota de minutos de Actions) e quem monitora não é
+      # obrigado a publicar o endereço do que monitora.
+      #
+      # Segredo ausente deixa o componente sem URL, e componente sem URL não é
+      # sondado — aparece como pendente, em vez de a sonda buscar um endereço
+      # quebrado e reportar queda. É por isso que QA e produção podem ficar sem
+      # segredo até serem ligados.
+      #
+      # `schedule` e `workflow_dispatch` rodam no contexto do próprio
+      # repositório, então enxergam os segredos. Se um dia entrar gatilho por
+      # `pull_request`, saiba que fork não recebe segredo.
+      - name: Verificar os serviços
+        run: node sonda.js
+        env:
+          STATUS_URL_DEV_WEB:   ${{ secrets.STATUS_URL_DEV_WEB }}
+          STATUS_URL_DEV_API:   ${{ secrets.STATUS_URL_DEV_API }}
+          STATUS_URL_QA_WEB:    ${{ secrets.STATUS_URL_QA_WEB }}
+          STATUS_URL_QA_API:    ${{ secrets.STATUS_URL_QA_API }}
+          STATUS_URL_PROD_WEB:  ${{ secrets.STATUS_URL_PROD_WEB }}
+          STATUS_URL_PROD_API:  ${{ secrets.STATUS_URL_PROD_API }}
+
+      - name: Publicar o resultado
+        run: |
+          git config user.name  "sonda-de-status"
+          git config user.email "sonda@users.noreply.github.com"
+          # incidentes.json entra junto: a sonda abre e fecha incidente sozinha,
+          # e deixá-lo de fora faria o incidente existir só na execução.
+          git add docs/status.json docs/incidentes.json
+          # Sem mudança, sem commit: fora da janela a sonda nem escreve, e um
+          # commit vazio a cada meia hora sujaria o histórico para sempre.
+          if git diff --staged --quiet; then
+            echo "Nada mudou."
+          else
+            git commit -m "status: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push
+          fi

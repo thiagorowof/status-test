@@ -1,0 +1,142 @@
+{
+  "titulo": "Status — Assistência Técnica",
+  "subtitulo": "Ambientes do ADI",
+  "geral": "ok",
+  "atualizadoEm": "2026-09-06T04:52:48.407Z",
+  "janela": {
+    "inicio": 7,
+    "fim": 22
+  },
+  "fusoHorario": "America/Sao_Paulo",
+  "diasDeHistorico": 90,
+  "ambientes": [
+    {
+      "id": "dev",
+      "nome": "Desenvolvimento",
+      "descricao": "Onde o time valida antes de subir para QA",
+      "monitorar": true,
+      "geral": "ok",
+      "componentes": [
+        {
+          "id": "dev-web",
+          "nome": "Aplicação web",
+          "descricao": "A tela que o usuário abre no navegador",
+          "estado": "ok",
+          "tempoRespostaMs": 988,
+          "detalhe": null,
+          "falhasSeguidas": 0,
+          "verificadoEm": "2026-09-06T04:52:47.919Z",
+          "desde": "2026-09-06T00:25:06.975Z",
+          "historico": [
+            {
+              "dia": "2026-09-05",
+              "verificacoes": 2,
+              "falhas": 0,
+              "degradado": 0
+            },
+            {
+              "dia": "2026-09-06",
+              "verificacoes": 2,
+              "falhas": 0,
+              "degradado": 0
+            }
+          ]
+        },
+        {
+          "id": "dev-api",
+          "nome": "API",
+          "descricao": "Serviço que atende o sistema de assistência técnica",
+          "estado": "ok",
+          "tempoRespostaMs": 414,
+          "detalhe": null,
+          "falhasSeguidas": 0,
+          "verificadoEm": "2026-09-06T04:52:48.406Z",
+          "desde": "2026-09-06T00:25:07.358Z",
+          "historico": [
+            {
+              "dia": "2026-09-05",
+              "verificacoes": 3,
+              "falhas": 1,
+              "degradado": 0,
+              "motivos": {
+                "HTTP 404": 1
+              }
+            },
+            {
+              "dia": "2026-09-06",
+              "verificacoes": 2,
+              "falhas": 0,
+              "degradado": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "qa",
+      "nome": "Homologação",
+      "descricao": "Onde o cliente valida antes da publicação",
+      "monitorar": false,
+      "geral": "pendente",
+      "componentes": [
+        {
+          "id": "qa-web",
+          "nome": "Aplicação web",
+          "descricao": "A tela que o usuário abre no navegador",
+          "estado": "pendente",
+          "tempoRespostaMs": null,
+          "detalhe": null,
+          "falhasSeguidas": 0,
+          "verificadoEm": null,
+          "desde": "2026-09-06T04:28:54.443Z",
+          "historico": []
+        },
+        {
+          "id": "qa-api",
+          "nome": "API",
+          "descricao": "Serviço que atende o sistema de assistência técnica",
+          "estado": "pendente",
+          "tempoRespostaMs": null,
+          "detalhe": null,
+          "falhasSeguidas": 0,
+          "verificadoEm": null,
+          "desde": "2026-09-06T04:28:54.443Z",
+          "historico": []
+        }
+      ]
+    },
+    {
+      "id": "prod",
+      "nome": "Produção",
+      "descricao": "O ambiente que os clientes usam",
+      "monitorar": false,
+      "geral": "pendente",
+      "componentes": [
+        {
+          "id": "prod-web",
+          "nome": "Aplicação web",
+          "descricao": "A tela que o usuário abre no navegador",
+          "estado": "pendente",
+          "tempoRespostaMs": null,
+          "detalhe": null,
+          "falhasSeguidas": 0,
+          "verificadoEm": null,
+          "desde": "2026-09-06T04:28:54.443Z",
+          "historico": []
+        },
+        {
+          "id": "prod-api",
+          "nome": "API",
+          "descricao": "Serviço que atende o sistema de assistência técnica",
+          "estado": "pendente",
+          "tempoRespostaMs": null,
+          "detalhe": null,
+          "falhasSeguidas": 0,
+          "verificadoEm": null,
+          "desde": "2026-09-06T04:28:54.443Z",
+          "historico": []
+        }
+      ]
+    }
+  ]
+}

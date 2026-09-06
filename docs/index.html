@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Status — Assistência Técnica</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{
+    --tinta:#16181d; --fraca:#6b7280; --linha:#e3e6ec; --fundo:#f6f7f9; --caixa:#fff;
+    --ok:#1b7f3b; --aviso:#b26a00; --ruim:#c62828; --vazio:#dfe3ea;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-tema="claro"]){
+      --tinta:#e4e8ef; --fraca:#98a2b3; --linha:#272e3a; --fundo:#101319; --caixa:#171b23;
+      --ok:#4ea96f; --aviso:#d99a3a; --ruim:#ef6f6f; --vazio:#252b35;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--fundo);color:var(--tinta);
+       font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+       -webkit-font-smoothing:antialiased}
+  .pagina{max-width:760px;margin:0 auto;padding:40px 20px 80px}
+
+  header{margin-bottom:26px}
+  h1{font-size:19px;margin:0 0 2px;font-weight:600}
+  .sub{color:var(--fraca);font-size:13px;margin:0}
+
+  /* faixa do estado geral: é a primeira e às vezes única coisa que a pessoa lê */
+  .faixa{border-radius:10px;padding:18px 20px;margin-bottom:26px;display:flex;
+         align-items:center;gap:14px;border:1px solid}
+  .faixa .bolinha{width:12px;height:12px;border-radius:50%;flex:none}
+  .faixa b{font-size:16px;font-weight:600;display:block}
+  .faixa span{font-size:13px;opacity:.85}
+  .f-ok{background:color-mix(in srgb,var(--ok) 10%,transparent);border-color:var(--ok);color:var(--ok)}
+  .f-aviso{background:color-mix(in srgb,var(--aviso) 12%,transparent);border-color:var(--aviso);color:var(--aviso)}
+  .f-ruim{background:color-mix(in srgb,var(--ruim) 10%,transparent);border-color:var(--ruim);color:var(--ruim)}
+  .f-vazio{background:var(--caixa);border-color:var(--linha);color:var(--fraca)}
+  .faixa .texto{color:var(--tinta)}
+
+  /* ambiente: agrupa os componentes e carrega o próprio estado no cabeçalho,
+     para dar a resposta "produção está de pé?" sem ler os itens de dentro */
+  .ambiente{margin-bottom:28px}
+  .cab-amb{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+  .cab-amb h2{font-size:15px;margin:0;font-weight:600}
+  .cab-amb .pilula{margin-left:auto;font-size:11px;font-weight:600;letter-spacing:.02em;
+                   text-transform:uppercase;padding:3px 9px;border-radius:20px;
+                   border:1px solid currentColor}
+  .desc-amb{color:var(--fraca);font-size:13px;margin:0 0 12px}
+  /* ambiente ainda não ligado fica visivelmente de lado, sem sumir da página:
+     ele existe para mostrar o que falta configurar */
+  .ambiente.inativo .componente{opacity:.65;border-style:dashed}
+
+  .componente{background:var(--caixa);border:1px solid var(--linha);border-radius:10px;
+              padding:16px 18px;margin-bottom:12px}
+  .linha{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .linha h3{font-size:15px;margin:0;font-weight:600}
+  .linha .estado{margin-left:auto;font-size:13px;font-weight:600}
+  .e-ok{color:var(--ok)} .e-aviso{color:var(--aviso)} .e-ruim{color:var(--ruim)}
+  .e-nulo{color:var(--fraca)}
+  .desc{color:var(--fraca);font-size:13px;margin:2px 0 14px}
+  .sem-dado{color:var(--fraca);font-size:12px;margin:0;font-style:italic}
+
+  /* barra de 90 dias */
+  .barras{display:flex;gap:2px;align-items:flex-end;height:32px}
+  .barras i{flex:1;min-width:2px;height:100%;border-radius:2px;background:var(--vazio);
+            display:block;position:relative}
+  .barras i.ok{background:var(--ok)}
+  .barras i.aviso{background:var(--aviso)}
+  .barras i.ruim{background:var(--ruim)}
+  .barras i:hover::after{content:attr(data-dica);position:absolute;bottom:130%;left:50%;
+      transform:translateX(-50%);background:var(--tinta);color:var(--fundo);font-size:11px;
+      padding:5px 9px;border-radius:5px;z-index:2;font-weight:500;
+      /* pre, não nowrap: a dica agora tem uma linha por motivo da falha */
+      white-space:pre;text-align:left;line-height:1.5}
+  /* nas pontas a dica escaparia da tela; ancora pelo lado de dentro */
+  .barras i:nth-child(-n+14):hover::after{left:0;transform:none}
+  .barras i:nth-last-child(-n+14):hover::after{left:auto;right:0;transform:none}
+  .escala{display:flex;justify-content:space-between;color:var(--fraca);font-size:11px;margin-top:6px}
+
+  .incidentes{margin-top:34px}
+  .incidentes h2{font-size:15px;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--linha)}
+  .incidente{background:var(--caixa);border:1px solid var(--linha);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+  .incidente h3{font-size:14px;margin:0 0 4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .incidente .quando{color:var(--fraca);font-size:12px}
+  /* diz quem escreveu: texto de máquina e texto de gente não têm o mesmo peso */
+  .etiqueta{font-size:10px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;
+            padding:2px 7px;border-radius:20px;border:1px solid var(--linha);color:var(--fraca)}
+  .etiqueta.aberto{color:var(--aviso);border-color:var(--aviso)}
+  .incidente ol{margin:10px 0 0;padding-left:18px;font-size:13px;color:var(--fraca)}
+  .nenhum{color:var(--fraca);font-size:14px;padding:16px;background:var(--caixa);
+          border:1px solid var(--linha);border-radius:10px}
+
+  footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--linha);
+         color:var(--fraca);font-size:12px;display:flex;gap:12px;flex-wrap:wrap}
+  .aviso-janela{margin-top:6px}
+</style>
+</head>
+<body>
+<div class="pagina">
+
+  <header>
+    <h1 id="titulo">Status</h1>
+    <p class="sub" id="subtitulo"></p>
+  </header>
+
+  <div class="faixa f-vazio" id="faixa">
+    <span class="bolinha" style="background:currentColor"></span>
+    <span class="texto"><b id="faixa-titulo">Carregando…</b><span id="faixa-detalhe"></span></span>
+  </div>
+
+  <div id="ambientes"></div>
+
+  <section class="incidentes">
+    <h2>Incidentes</h2>
+    <div id="incidentes"><div class="nenhum">Carregando…</div></div>
+  </section>
+
+  <footer>
+    <span id="atualizado"></span>
+    <span id="janela" class="aviso-janela"></span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var esc = function (v) {
+    return String(v === null || v === undefined ? '' : v)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  };
+
+  var ROTULO = {
+    ok:        { texto: 'Operacional',        classe: 'ok'    },
+    degradado: { texto: 'Degradado',          classe: 'aviso' },
+    fora:      { texto: 'Fora do ar',         classe: 'ruim'  },
+    pendente:  { texto: 'Não monitorado',     classe: 'nulo'  }
+  };
+
+  var FAIXA = {
+    ok:        { classe: 'f-ok',    titulo: 'Todos os sistemas operacionais' },
+    degradado: { classe: 'f-aviso', titulo: 'Operando com limitações' },
+    fora:      { classe: 'f-ruim',  titulo: 'Interrupção em andamento' },
+    pendente:  { classe: 'f-vazio', titulo: 'Nenhum ambiente monitorado' }
+  };
+
+  function dataHora(v) {
+    if (!v) return '—';
+    try { return new Date(v).toLocaleString('pt-BR'); } catch (_) { return v; }
+  }
+
+  function desde(v) {
+    if (!v) return '';
+    var s = Math.max(0, (Date.now() - new Date(v).getTime()) / 1000);
+    if (s < 3600) return 'há ' + Math.round(s / 60) + ' min';
+    if (s < 86400) return 'há ' + Math.round(s / 3600) + ' h';
+    return 'há ' + Math.round(s / 86400) + ' dia(s)';
+  }
+
+  /**
+   * Uma linha por motivo, sob o resumo do dia. Responde "qual falha foi essa?"
+   * sem precisar abrir o JSON — que era a única forma antes.
+   *
+   * Dias gravados antes de o motivo passar a ser guardado não têm o campo: aí a
+   * dica volta a ser só a contagem, em vez de afirmar um motivo que ninguém
+   * registrou.
+   */
+  function motivos(d) {
+    var m = d.motivos;
+    if (!m) return '';
+    var linhas = Object.keys(m).map(function (k) {
+      return '\n· ' + k + (m[k] > 1 ? ' (' + m[k] + '×)' : '');
+    });
+    return linhas.join('');
+  }
+
+  /**
+   * Barra de 90 dias. Dia sem verificação fica cinza em vez de verde — dizer
+   * "operacional" num dia em que ninguém olhou seria inventar histórico.
+   */
+  function barras(historico) {
+    var porDia = {};
+    (historico || []).forEach(function (d) { porDia[d.dia] = d; });
+
+    var itens = [];
+    for (var i = 89; i >= 0; i--) {
+      var data = new Date(Date.now() - i * 86400000);
+      var chave = data.toISOString().slice(0, 10);
+      var d = porDia[chave];
+      var classe = '', dica = chave + ': sem verificação';
+
+      if (d && d.verificacoes) {
+        if (d.falhas)         { classe = 'ruim';  dica = chave + ': ' + d.falhas + ' falha(s) em ' + d.verificacoes + motivos(d); }
+        else if (d.degradado) { classe = 'aviso'; dica = chave + ': degradado em ' + d.degradado + ' de ' + d.verificacoes + motivos(d); }
+        else                  { classe = 'ok';    dica = chave + ': sem falhas (' + d.verificacoes + ' verificações)'; }
+      }
+      itens.push('<i class="' + classe + '" data-dica="' + esc(dica) + '"></i>');
+    }
+    return '<div class="barras">' + itens.join('') + '</div>' +
+           '<div class="escala"><span>90 dias atrás</span><span>hoje</span></div>';
+  }
+
+  function componente(c) {
+    var r = ROTULO[c.estado] || { texto: 'Sem dados', classe: 'nulo' };
+    var temHistorico = (c.historico || []).length > 0;
+
+    // Sem sondagem e sem histórico, a barra de 90 dias seria 90 retângulos
+    // cinzas — ocupa espaço e não informa nada. Uma frase diz mais.
+    var corpo = (c.estado === 'pendente' && !temHistorico)
+      ? '<p class="sem-dado">Este componente ainda não é verificado.</p>'
+      : barras(c.historico);
+
+    return '<div class="componente">' +
+      '<div class="linha"><h3>' + esc(c.nome) + '</h3>' +
+        '<span class="estado e-' + r.classe + '">' + esc(r.texto) + '</span></div>' +
+      (c.descricao ? '<p class="desc">' + esc(c.descricao) + '</p>' : '') +
+      corpo +
+      (c.detalhe ? '<p class="desc" style="margin:10px 0 0">Afetado: ' + esc(c.detalhe) + '</p>' : '') +
+      '</div>';
+  }
+
+  function ambiente(a) {
+    var r = ROTULO[a.geral] || { texto: 'Sem dados', classe: 'nulo' };
+    return '<section class="ambiente' + (a.geral === 'pendente' ? ' inativo' : '') + '">' +
+      '<div class="cab-amb"><h2>' + esc(a.nome) + '</h2>' +
+        '<span class="pilula e-' + r.classe + '">' + esc(r.texto) + '</span></div>' +
+      (a.descricao ? '<p class="desc-amb">' + esc(a.descricao) + '</p>' : '') +
+      (a.componentes || []).map(componente).join('') +
+      '</section>';
+  }
+
+  function incidente(i) {
+    var passos = (i.atualizacoes || []).map(function (a) {
+      return '<li><strong>' + esc(a.situacao) + '</strong> — ' + esc(a.texto) +
+             ' <span class="quando">(' + esc(dataHora(a.quando)) + ')</span></li>';
+    }).join('');
+
+    var etiquetas =
+      (!i.fim ? '<span class="etiqueta aberto">Em andamento</span>' : '') +
+      (i.origem === 'automatico' ? '<span class="etiqueta">Automático</span>' : '');
+
+    return '<div class="incidente"><h3>' + esc(i.titulo) + etiquetas + '</h3>' +
+      '<div class="quando">' + esc(dataHora(i.inicio)) +
+      (i.fim ? ' — resolvido em ' + esc(dataHora(i.fim)) : ' — em andamento') + '</div>' +
+      (passos ? '<ol>' + passos + '</ol>' : '') + '</div>';
+  }
+
+  // cache-busting: o JSON muda a cada meia hora e o CDN do Pages guarda bem
+  var agora = Date.now();
+
+  function baixar(arquivo) {
+    return fetch(arquivo + '?t=' + agora)
+      .then(function (r) { return r.json(); })
+      .catch(function () { return null; });
+  }
+
+  /**
+   * Os dois arquivos são lidos juntos porque a faixa do topo depende dos dois.
+   *
+   * Antes cada um renderizava por conta própria, e a faixa dizia "Todos os
+   * sistemas operacionais" logo acima de um incidente em andamento — a sonda
+   * mede disponibilidade e não enxerga lentidão, que é justamente o caso em que
+   * alguém publica um incidente à mão.
+   */
+  Promise.all([baixar('status.json'), baixar('incidentes.json')]).then(function (res) {
+    var d = res[0];
+    var todosIncidentes = res[1] && res[1].incidentes;
+
+    renderizarIncidentes(todosIncidentes, d);
+    if (!d) {
+      document.getElementById('faixa-titulo').textContent = 'Não foi possível carregar o status';
+      return;
+    }
+
+    document.getElementById('titulo').textContent = d.titulo || 'Status';
+    document.getElementById('subtitulo').textContent = d.subtitulo || '';
+    document.title = d.titulo || 'Status';
+
+    var ambientes = d.ambientes || [];
+    var abertos = (todosIncidentes || []).filter(function (i) { return !i.fim; });
+
+    // Incidente em aberto rebaixa a faixa quando a sonda não viu nada. O
+    // contrário não vale: se a sonda mede queda, "fora do ar" continua
+    // prevalecendo sobre um incidente que alguém classificou como leve.
+    var geral = d.geral;
+    if (abertos.length && (geral === 'ok' || geral === 'pendente')) geral = 'degradado';
+
+    var f = FAIXA[geral] || { classe: 'f-vazio', titulo: 'Sem dados' };
+    var faixa = document.getElementById('faixa');
+    faixa.className = 'faixa ' + f.classe;
+    document.getElementById('faixa-titulo').textContent = f.titulo;
+
+    // A faixa nomeia o ambiente afetado. "Interrupção em andamento" sem dizer
+    // onde faz todo mundo abrir um chamado, inclusive quem usa produção quando
+    // quem caiu foi homologação.
+    var afetado = null;
+    ambientes.forEach(function (a) {
+      (a.componentes || []).forEach(function (c) {
+        if (!afetado && c.estado !== 'ok' && c.estado !== 'pendente') {
+          afetado = { ambiente: a.nome, componente: c };
+        }
+      });
+    });
+
+    var detalhe;
+    if (afetado) {
+      detalhe = afetado.ambiente + ' — ' + afetado.componente.nome + ', ' + desde(afetado.componente.desde);
+    } else if (abertos.length) {
+      detalhe = abertos[0].titulo + (abertos.length > 1 ? ' e mais ' + (abertos.length - 1) : '');
+    } else if (d.geral === 'pendente') {
+      detalhe = 'nenhum ambiente configurado para verificação';
+    } else {
+      var ativos = ambientes.filter(function (a) { return a.geral !== 'pendente'; })
+                            .map(function (a) { return a.nome; });
+      detalhe = 'verificado ' + desde(d.atualizadoEm) +
+                (ativos.length ? ' · ' + ativos.join(', ') : '');
+    }
+    document.getElementById('faixa-detalhe').textContent = detalhe;
+
+    document.getElementById('ambientes').innerHTML = ambientes.map(ambiente).join('');
+    document.getElementById('atualizado').textContent = 'Última verificação: ' + dataHora(d.atualizadoEm);
+
+    if (d.janela) {
+      document.getElementById('janela').textContent =
+        'Verificações entre ' + d.janela.inicio + 'h e ' + d.janela.fim + 'h (horário de Brasília).';
+    }
+  });
+
+  /**
+   * A janela vem do status.json, a mesma das barras de 90 dias. Antes o texto
+   * prometia "últimos 90 dias" e a lista mostrava tudo que houvesse no arquivo,
+   * na ordem em que estivesse escrito.
+   */
+  function renderizarIncidentes(todos, status) {
+    var alvo = document.getElementById('incidentes');
+
+    if (!todos) {
+      alvo.innerHTML = '<div class="nenhum">Não foi possível carregar os incidentes.</div>';
+      return;
+    }
+
+    var dias = (status && status.diasDeHistorico) || 90;
+    var limite = Date.now() - dias * 86400000;
+
+    var lista = todos
+      .filter(function (i) { return !i.inicio || new Date(i.inicio).getTime() >= limite; })
+      .sort(function (a, b) { return new Date(b.inicio) - new Date(a.inicio); })
+      .slice(0, 20);
+
+    alvo.innerHTML = lista.length
+      ? lista.map(incidente).join('')
+      : '<div class="nenhum">Nenhum incidente nos últimos ' + dias + ' dias.</div>';
+  }
+})();
+</script>
+</body>
+</html>
