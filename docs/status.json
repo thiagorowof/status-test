@@ -2,7 +2,7 @@
   "titulo": "Status — Assistência Técnica",
   "subtitulo": "Ambientes do ADI",
   "geral": "ok",
-  "atualizadoEm": "2026-09-06T16:24:42.095Z",
+  "atualizadoEm": "2026-09-06T18:33:07.730Z",
   "janela": {
     "inicio": 7,
     "fim": 22
@@ -22,10 +22,10 @@
           "nome": "Aplicação web",
           "descricao": "A tela que o usuário abre no navegador",
           "estado": "ok",
-          "tempoRespostaMs": 127,
+          "tempoRespostaMs": 118,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-09-06T16:24:30.286Z",
+          "verificadoEm": "2026-09-06T18:32:42.816Z",
           "desde": "2026-09-06T00:25:06.975Z",
           "historico": [
             {
@@ -36,7 +36,7 @@
             },
             {
               "dia": "2026-09-06",
-              "verificacoes": 5,
+              "verificacoes": 6,
               "falhas": 0,
               "degradado": 0
             }
@@ -47,10 +47,10 @@
           "nome": "API",
           "descricao": "Serviço que atende o sistema de assistência técnica",
           "estado": "ok",
-          "tempoRespostaMs": 11805,
+          "tempoRespostaMs": 24911,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-09-06T16:24:42.094Z",
+          "verificadoEm": "2026-09-06T18:33:07.729Z",
           "desde": "2026-09-06T00:25:07.358Z",
           "historico": [
             {
@@ -64,7 +64,7 @@
             },
             {
               "dia": "2026-09-06",
-              "verificacoes": 5,
+              "verificacoes": 6,
               "falhas": 0,
               "degradado": 0
             }
