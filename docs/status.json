@@ -2,7 +2,7 @@
   "titulo": "Status — Sistemas Informata",
   "subtitulo": "Assistência Técnica e Gerenciador de Fila",
   "geral": "fora",
-  "atualizadoEm": "2026-09-20T20:33:24.229Z",
+  "atualizadoEm": "2026-09-20T23:05:31.111Z",
   "janela": {
     "inicio": 7,
     "fim": 22
@@ -23,10 +23,10 @@
           "nome": "Aplicação web",
           "descricao": "A tela que o usuário abre no navegador",
           "estado": "ok",
-          "tempoRespostaMs": 225,
+          "tempoRespostaMs": 112,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-09-20T20:32:59.976Z",
+          "verificadoEm": "2026-09-20T23:04:56.728Z",
           "desde": "2026-09-06T00:25:06.975Z",
           "historico": [
             {
@@ -121,7 +121,7 @@
             },
             {
               "dia": "2026-09-20",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -133,10 +133,10 @@
           "nome": "API",
           "descricao": "Serviço que atende o sistema de assistência técnica",
           "estado": "ok",
-          "tempoRespostaMs": 13016,
+          "tempoRespostaMs": 22979,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-09-20T20:33:12.998Z",
+          "verificadoEm": "2026-09-20T23:05:19.709Z",
           "desde": "2026-09-06T00:25:07.358Z",
           "historico": [
             {
@@ -234,7 +234,7 @@
             },
             {
               "dia": "2026-09-20",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -246,10 +246,10 @@
           "nome": "Agendamento",
           "descricao": "Onde o cliente agenda o atendimento",
           "estado": "fora",
-          "tempoRespostaMs": 10492,
+          "tempoRespostaMs": 10491,
           "detalhe": "nao respondeu",
-          "falhasSeguidas": 57,
-          "verificadoEm": "2026-09-20T20:33:23.490Z",
+          "falhasSeguidas": 58,
+          "verificadoEm": "2026-09-20T23:05:30.200Z",
           "desde": "2026-09-06T21:47:08.619Z",
           "historico": [
             {
@@ -380,11 +380,11 @@
             },
             {
               "dia": "2026-09-20",
-              "verificacoes": 3,
-              "falhas": 3,
+              "verificacoes": 4,
+              "falhas": 4,
               "degradado": 0,
               "motivos": {
-                "nao respondeu": 3
+                "nao respondeu": 4
               }
             }
           ]
@@ -395,10 +395,10 @@
           "nome": "Atendimento presencial",
           "descricao": "Retirada de senha na unidade",
           "estado": "ok",
-          "tempoRespostaMs": 240,
+          "tempoRespostaMs": 300,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-09-20T20:33:23.731Z",
+          "verificadoEm": "2026-09-20T23:05:30.501Z",
           "desde": "2026-09-06T21:47:08.927Z",
           "historico": [
             {
@@ -490,7 +490,7 @@
             },
             {
               "dia": "2026-09-20",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -502,10 +502,10 @@
           "nome": "Atendentes",
           "descricao": "Tela de quem chama a próxima senha",
           "estado": "ok",
-          "tempoRespostaMs": 240,
+          "tempoRespostaMs": 306,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-09-20T20:33:23.971Z",
+          "verificadoEm": "2026-09-20T23:05:30.807Z",
           "desde": "2026-09-06T21:09:05.961Z",
           "historico": [
             {
@@ -594,7 +594,7 @@
             },
             {
               "dia": "2026-09-20",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -606,10 +606,10 @@
           "nome": "API",
           "descricao": "Serviço que distribui as senhas",
           "estado": "ok",
-          "tempoRespostaMs": 256,
+          "tempoRespostaMs": 303,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-09-20T20:33:24.228Z",
+          "verificadoEm": "2026-09-20T23:05:31.110Z",
           "desde": "2026-09-06T21:47:09.552Z",
           "historico": [
             {
@@ -698,7 +698,7 @@
             },
             {
               "dia": "2026-09-20",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
