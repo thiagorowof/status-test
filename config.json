@@ -159,8 +159,7 @@
           "nome": "API",
           "descricao": "Serviço que distribui as senhas",
           "url": "${STATUS_URL_GDF_PROD_API}",
-          "tipo": "health",
-          "monitorar": false
+          "tipo": "health"
         }
       ]
     }
