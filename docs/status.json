@@ -2,7 +2,7 @@
   "titulo": "Status — Sistemas Informata",
   "subtitulo": "Assistência Técnica e Gerenciador de Fila",
   "geral": "fora",
-  "atualizadoEm": "2026-09-23T00:09:45.020Z",
+  "atualizadoEm": "2026-09-23T04:35:11.912Z",
   "janela": {
     "inicio": 7,
     "fim": 22
@@ -23,10 +23,10 @@
           "nome": "Aplicação web",
           "descricao": "A tela que o usuário abre no navegador",
           "estado": "ok",
-          "tempoRespostaMs": 466,
+          "tempoRespostaMs": 268,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-09-23T00:09:21.360Z",
+          "verificadoEm": "2026-09-23T04:34:56.600Z",
           "desde": "2026-09-06T00:25:06.975Z",
           "historico": [
             {
@@ -136,6 +136,12 @@
               "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
+            },
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 0,
+              "degradado": 0
             }
           ]
         },
@@ -145,10 +151,10 @@
           "nome": "API",
           "descricao": "Serviço que atende o sistema de assistência técnica",
           "estado": "ok",
-          "tempoRespostaMs": 12067,
+          "tempoRespostaMs": 221,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-09-23T00:09:33.436Z",
+          "verificadoEm": "2026-09-23T04:34:56.852Z",
           "desde": "2026-09-06T00:25:07.358Z",
           "historico": [
             {
@@ -261,6 +267,12 @@
               "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
+            },
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 0,
+              "degradado": 0
             }
           ]
         },
@@ -270,10 +282,10 @@
           "nome": "Agendamento",
           "descricao": "Onde o cliente agenda o atendimento",
           "estado": "fora",
-          "tempoRespostaMs": 10493,
+          "tempoRespostaMs": 10017,
           "detalhe": "nao respondeu",
-          "falhasSeguidas": 65,
-          "verificadoEm": "2026-09-23T00:09:43.930Z",
+          "falhasSeguidas": 66,
+          "verificadoEm": "2026-09-23T04:35:06.869Z",
           "desde": "2026-09-06T21:47:08.619Z",
           "historico": [
             {
@@ -428,6 +440,15 @@
               "motivos": {
                 "nao respondeu": 4
               }
+            },
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 1,
+              "degradado": 0,
+              "motivos": {
+                "nao respondeu": 1
+              }
             }
           ]
         },
@@ -437,10 +458,10 @@
           "nome": "Atendimento presencial",
           "descricao": "Retirada de senha na unidade",
           "estado": "ok",
-          "tempoRespostaMs": 361,
+          "tempoRespostaMs": 317,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-09-23T00:09:44.292Z",
+          "verificadoEm": "2026-09-23T04:35:07.186Z",
           "desde": "2026-09-06T21:47:08.927Z",
           "historico": [
             {
@@ -547,6 +568,12 @@
               "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
+            },
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 0,
+              "degradado": 0
             }
           ]
         },
@@ -556,10 +583,10 @@
           "nome": "Atendentes",
           "descricao": "Tela de quem chama a próxima senha",
           "estado": "ok",
-          "tempoRespostaMs": 360,
+          "tempoRespostaMs": 317,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-09-23T00:09:44.653Z",
+          "verificadoEm": "2026-09-23T04:35:07.504Z",
           "desde": "2026-09-06T21:09:05.961Z",
           "historico": [
             {
@@ -663,6 +690,12 @@
               "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
+            },
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 0,
+              "degradado": 0
             }
           ]
         },
@@ -672,10 +705,10 @@
           "nome": "API",
           "descricao": "Serviço que distribui as senhas",
           "estado": "ok",
-          "tempoRespostaMs": 365,
+          "tempoRespostaMs": 325,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-09-23T00:09:45.020Z",
+          "verificadoEm": "2026-09-23T04:35:07.830Z",
           "desde": "2026-09-06T21:47:09.552Z",
           "historico": [
             {
@@ -779,6 +812,12 @@
               "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
+            },
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 0,
+              "degradado": 0
             }
           ]
         }
@@ -788,34 +827,48 @@
       "id": "qa",
       "nome": "Homologação",
       "descricao": "Onde o cliente valida antes da publicação",
-      "monitorar": false,
-      "geral": "pendente",
+      "monitorar": true,
+      "geral": "ok",
       "componentes": [
         {
           "id": "qa-web",
           "sistema": "Assistência Técnica",
           "nome": "Aplicação web",
           "descricao": "A tela que o usuário abre no navegador",
-          "estado": "pendente",
-          "tempoRespostaMs": null,
+          "estado": "ok",
+          "tempoRespostaMs": 208,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": null,
-          "desde": "2026-09-06T04:28:54.443Z",
-          "historico": []
+          "verificadoEm": "2026-09-23T04:35:08.040Z",
+          "desde": "2026-09-23T04:35:08.040Z",
+          "historico": [
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 0,
+              "degradado": 0
+            }
+          ]
         },
         {
           "id": "qa-api",
           "sistema": "Assistência Técnica",
           "nome": "API",
           "descricao": "Serviço que atende o sistema de assistência técnica",
-          "estado": "pendente",
-          "tempoRespostaMs": null,
+          "estado": "ok",
+          "tempoRespostaMs": 517,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": null,
-          "desde": "2026-09-06T04:28:54.443Z",
-          "historico": []
+          "verificadoEm": "2026-09-23T04:35:08.558Z",
+          "desde": "2026-09-23T04:35:08.558Z",
+          "historico": [
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 0,
+              "degradado": 0
+            }
+          ]
         }
       ]
     },
@@ -823,60 +876,128 @@
       "id": "prod",
       "nome": "Produção",
       "descricao": "O ambiente que os clientes usam",
-      "monitorar": false,
-      "geral": "pendente",
+      "monitorar": true,
+      "geral": "ok",
       "componentes": [
         {
           "id": "prod-web",
           "sistema": "Assistência Técnica",
           "nome": "Aplicação web",
           "descricao": "A tela que o usuário abre no navegador",
-          "estado": "pendente",
-          "tempoRespostaMs": null,
+          "estado": "ok",
+          "tempoRespostaMs": 206,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": null,
-          "desde": "2026-09-06T04:28:54.443Z",
-          "historico": []
+          "verificadoEm": "2026-09-23T04:35:08.765Z",
+          "desde": "2026-09-23T04:35:08.765Z",
+          "historico": [
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 0,
+              "degradado": 0
+            }
+          ]
         },
         {
           "id": "prod-api",
           "sistema": "Assistência Técnica",
           "nome": "API",
           "descricao": "Serviço que atende o sistema de assistência técnica",
-          "estado": "pendente",
-          "tempoRespostaMs": null,
+          "estado": "ok",
+          "tempoRespostaMs": 536,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": null,
-          "desde": "2026-09-06T04:28:54.443Z",
-          "historico": []
+          "verificadoEm": "2026-09-23T04:35:09.302Z",
+          "desde": "2026-09-23T04:35:09.302Z",
+          "historico": [
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 0,
+              "degradado": 0
+            }
+          ]
         },
         {
-          "id": "prod-gdf-web",
+          "id": "prod-gdf-agendamento",
           "sistema": "Gerenciador de Fila",
-          "nome": "Retirada de senha",
-          "descricao": "A tela pública de retirada de senha",
-          "estado": "pendente",
-          "tempoRespostaMs": null,
+          "nome": "Agendamento",
+          "descricao": "Onde o cliente agenda o atendimento",
+          "estado": "ok",
+          "tempoRespostaMs": 811,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": null,
-          "desde": "2026-09-06T21:09:05.962Z",
-          "historico": []
+          "verificadoEm": "2026-09-23T04:35:10.115Z",
+          "desde": "2026-09-23T04:35:10.115Z",
+          "historico": [
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 0,
+              "degradado": 0
+            }
+          ]
+        },
+        {
+          "id": "prod-gdf-presencial",
+          "sistema": "Gerenciador de Fila",
+          "nome": "Atendimento presencial",
+          "descricao": "Retirada de senha na unidade",
+          "estado": "ok",
+          "tempoRespostaMs": 813,
+          "detalhe": null,
+          "falhasSeguidas": 0,
+          "verificadoEm": "2026-09-23T04:35:10.930Z",
+          "desde": "2026-09-23T04:35:10.930Z",
+          "historico": [
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 0,
+              "degradado": 0
+            }
+          ]
+        },
+        {
+          "id": "prod-gdf-atendentes",
+          "sistema": "Gerenciador de Fila",
+          "nome": "Atendentes",
+          "descricao": "Tela de quem chama a próxima senha",
+          "estado": "ok",
+          "tempoRespostaMs": 807,
+          "detalhe": null,
+          "falhasSeguidas": 0,
+          "verificadoEm": "2026-09-23T04:35:11.738Z",
+          "desde": "2026-09-23T04:35:11.738Z",
+          "historico": [
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 0,
+              "degradado": 0
+            }
+          ]
         },
         {
           "id": "prod-gdf-api",
           "sistema": "Gerenciador de Fila",
           "nome": "API",
           "descricao": "Serviço que distribui as senhas",
-          "estado": "pendente",
-          "tempoRespostaMs": null,
+          "estado": "ok",
+          "tempoRespostaMs": 172,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": null,
-          "desde": "2026-09-06T21:09:05.962Z",
-          "historico": []
+          "verificadoEm": "2026-09-23T04:35:11.911Z",
+          "desde": "2026-09-23T04:35:11.911Z",
+          "historico": [
+            {
+              "dia": "2026-09-23",
+              "verificacoes": 1,
+              "falhas": 0,
+              "degradado": 0
+            }
+          ]
         }
       ]
     }
