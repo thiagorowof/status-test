@@ -79,7 +79,7 @@
       "id": "qa",
       "nome": "Homologação",
       "descricao": "Onde o cliente valida antes da publicação",
-      "monitorar": false,
+      "monitorar": true,
       "componentes": [
         {
           "id": "qa-web",
@@ -113,8 +113,7 @@
           "descricao": "A tela que o usuário abre no navegador",
           "url": "${STATUS_URL_PROD_WEB}",
           "tipo": "conteudo",
-          "contem": "<app-root",
-          "monitorar": false
+          "contem": "<app-root"
         },
         {
           "id": "prod-api",
@@ -122,8 +121,7 @@
           "nome": "API",
           "descricao": "Serviço que atende o sistema de assistência técnica",
           "url": "${STATUS_URL_PROD_API}",
-          "tipo": "health",
-          "monitorar": false
+          "tipo": "health"
         },
         {
           "id": "prod-gdf-agendamento",
