@@ -104,7 +104,7 @@
       "id": "prod",
       "nome": "Produção",
       "descricao": "O ambiente que os clientes usam",
-      "monitorar": false,
+      "monitorar": true,
       "componentes": [
         {
           "id": "prod-web",
@@ -113,7 +113,8 @@
           "descricao": "A tela que o usuário abre no navegador",
           "url": "${STATUS_URL_PROD_WEB}",
           "tipo": "conteudo",
-          "contem": "<app-root"
+          "contem": "<app-root",
+          "monitorar": false
         },
         {
           "id": "prod-api",
@@ -121,16 +122,36 @@
           "nome": "API",
           "descricao": "Serviço que atende o sistema de assistência técnica",
           "url": "${STATUS_URL_PROD_API}",
-          "tipo": "health"
+          "tipo": "health",
+          "monitorar": false
         },
         {
-          "id": "prod-gdf-web",
+          "id": "prod-gdf-agendamento",
           "sistema": "Gerenciador de Fila",
-          "nome": "Retirada de senha",
-          "descricao": "A tela pública de retirada de senha",
-          "url": "${STATUS_URL_GDF_PROD_WEB}",
+          "nome": "Agendamento",
+          "descricao": "Onde o cliente agenda o atendimento",
+          "url": "${STATUS_URL_GDF_PROD_AGENDAMENTO}",
           "tipo": "conteudo",
           "contem": "<app-root"
+        },
+        {
+          "id": "prod-gdf-presencial",
+          "idAnterior": "prod-gdf-web",
+          "sistema": "Gerenciador de Fila",
+          "nome": "Atendimento presencial",
+          "descricao": "Retirada de senha na unidade",
+          "url": "${STATUS_URL_GDF_PROD_PRESENCIAL}",
+          "tipo": "conteudo",
+          "contem": "<app-root"
+        },
+        {
+          "id": "prod-gdf-atendentes",
+          "sistema": "Gerenciador de Fila",
+          "nome": "Atendentes",
+          "descricao": "Tela de quem chama a próxima senha",
+          "url": "${STATUS_URL_GDF_PROD_ATENDENTES}",
+          "tipo": "conteudo",
+          "contem": "<info-root"
         },
         {
           "id": "prod-gdf-api",
@@ -138,7 +159,8 @@
           "nome": "API",
           "descricao": "Serviço que distribui as senhas",
           "url": "${STATUS_URL_GDF_PROD_API}",
-          "tipo": "health"
+          "tipo": "health",
+          "monitorar": false
         }
       ]
     }

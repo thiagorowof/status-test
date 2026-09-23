@@ -58,8 +58,10 @@ jobs:
           STATUS_URL_GDF_DEV_PRESENCIAL:  ${{ secrets.STATUS_URL_GDF_DEV_PRESENCIAL }}
           STATUS_URL_GDF_DEV_ATENDENTES:  ${{ secrets.STATUS_URL_GDF_DEV_ATENDENTES }}
           STATUS_URL_GDF_DEV_API:         ${{ secrets.STATUS_URL_GDF_DEV_API }}
-          STATUS_URL_GDF_PROD_WEB:        ${{ secrets.STATUS_URL_GDF_PROD_WEB }}
-          STATUS_URL_GDF_PROD_API:        ${{ secrets.STATUS_URL_GDF_PROD_API }}
+          STATUS_URL_GDF_PROD_AGENDAMENTO: ${{ secrets.STATUS_URL_GDF_PROD_AGENDAMENTO }}
+          STATUS_URL_GDF_PROD_PRESENCIAL:  ${{ secrets.STATUS_URL_GDF_PROD_PRESENCIAL }}
+          STATUS_URL_GDF_PROD_ATENDENTES:  ${{ secrets.STATUS_URL_GDF_PROD_ATENDENTES }}
+          STATUS_URL_GDF_PROD_API:         ${{ secrets.STATUS_URL_GDF_PROD_API }}
           STATUS_URL_PROD_API:  ${{ secrets.STATUS_URL_PROD_API }}
 
       - name: Publicar o resultado
