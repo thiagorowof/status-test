@@ -11,8 +11,14 @@
           "situacao": "Detectado",
           "texto": "A verificação automática falhou 2 vezes seguidas. Motivo relatado: nao respondeu.",
           "quando": "2026-09-06T23:01:18.672Z"
+        },
+        {
+          "situacao": "Normalizado",
+          "texto": "As verificações automáticas voltaram a responder.",
+          "quando": "2026-09-24T18:54:10.575Z"
         }
-      ]
+      ],
+      "fim": "2026-09-24T18:54:10.575Z"
     }
   ]
 }
