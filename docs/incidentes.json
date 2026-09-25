@@ -2,6 +2,20 @@
   "incidentes": [
     {
       "origem": "automatico",
+      "componente": "dev-api",
+      "titulo": "Assistência Técnica: API indisponível — Desenvolvimento",
+      "inicio": "2026-09-25T15:04:18.413Z",
+      "ultimoMotivo": "HTTP 404",
+      "atualizacoes": [
+        {
+          "situacao": "Detectado",
+          "texto": "A verificação automática falhou 2 vezes seguidas. Motivo relatado: HTTP 404.",
+          "quando": "2026-09-25T19:27:10.665Z"
+        }
+      ]
+    },
+    {
+      "origem": "automatico",
       "componente": "dev-gdf-agendamento",
       "titulo": "Gerenciador de Fila: Agendamento indisponível — Desenvolvimento",
       "inicio": "2026-09-06T21:47:08.619Z",
