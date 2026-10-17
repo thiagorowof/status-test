@@ -2,7 +2,7 @@
   "titulo": "Status — Sistemas Informata",
   "subtitulo": "Assistência Técnica e Gerenciador de Fila",
   "geral": "fora",
-  "atualizadoEm": "2026-10-17T19:06:53.033Z",
+  "atualizadoEm": "2026-10-17T21:38:58.816Z",
   "janela": {
     "inicio": 7,
     "fim": 22
@@ -23,10 +23,10 @@
           "nome": "Aplicação web",
           "descricao": "A tela que o usuário abre no navegador",
           "estado": "ok",
-          "tempoRespostaMs": 141,
+          "tempoRespostaMs": 178,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-10-17T19:06:27.228Z",
+          "verificadoEm": "2026-10-17T21:38:33.409Z",
           "desde": "2026-09-06T00:25:06.975Z",
           "historico": [
             {
@@ -283,7 +283,7 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -295,10 +295,10 @@
           "nome": "API",
           "descricao": "Serviço que atende o sistema de assistência técnica",
           "estado": "fora",
-          "tempoRespostaMs": 11925,
+          "tempoRespostaMs": 11531,
           "detalhe": "HTTP 404",
-          "falhasSeguidas": 63,
-          "verificadoEm": "2026-10-17T19:06:39.155Z",
+          "falhasSeguidas": 64,
+          "verificadoEm": "2026-10-17T21:38:44.943Z",
           "desde": "2026-09-25T15:04:18.413Z",
           "historico": [
             {
@@ -624,11 +624,11 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
-              "falhas": 3,
+              "verificacoes": 4,
+              "falhas": 4,
               "degradado": 0,
               "motivos": {
-                "HTTP 404": 3
+                "HTTP 404": 4
               }
             }
           ]
@@ -639,10 +639,10 @@
           "nome": "Agendamento",
           "descricao": "Onde o cliente agenda o atendimento",
           "estado": "ok",
-          "tempoRespostaMs": 244,
+          "tempoRespostaMs": 249,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-10-17T19:06:39.399Z",
+          "verificadoEm": "2026-10-17T21:38:45.193Z",
           "desde": "2026-09-24T18:54:04.937Z",
           "historico": [
             {
@@ -950,7 +950,7 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -962,10 +962,10 @@
           "nome": "Atendimento presencial",
           "descricao": "Retirada de senha na unidade",
           "estado": "ok",
-          "tempoRespostaMs": 243,
+          "tempoRespostaMs": 240,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-10-17T19:06:39.643Z",
+          "verificadoEm": "2026-10-17T21:38:45.433Z",
           "desde": "2026-09-06T21:47:08.927Z",
           "historico": [
             {
@@ -1219,7 +1219,7 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -1231,10 +1231,10 @@
           "nome": "Atendentes",
           "descricao": "Tela de quem chama a próxima senha",
           "estado": "ok",
-          "tempoRespostaMs": 243,
+          "tempoRespostaMs": 239,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-10-17T19:06:39.887Z",
+          "verificadoEm": "2026-10-17T21:38:45.674Z",
           "desde": "2026-09-06T21:09:05.961Z",
           "historico": [
             {
@@ -1485,7 +1485,7 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -1497,10 +1497,10 @@
           "nome": "API",
           "descricao": "Serviço que distribui as senhas",
           "estado": "fora",
-          "tempoRespostaMs": 10260,
+          "tempoRespostaMs": 10261,
           "detalhe": "nao respondeu",
-          "falhasSeguidas": 33,
-          "verificadoEm": "2026-10-17T19:06:50.147Z",
+          "falhasSeguidas": 34,
+          "verificadoEm": "2026-10-17T21:38:55.935Z",
           "desde": "2026-10-06T00:55:18.648Z",
           "historico": [
             {
@@ -1790,11 +1790,11 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
-              "falhas": 3,
+              "verificacoes": 4,
+              "falhas": 4,
               "degradado": 0,
               "motivos": {
-                "nao respondeu": 3
+                "nao respondeu": 4
               }
             }
           ]
@@ -1814,10 +1814,10 @@
           "nome": "Aplicação web",
           "descricao": "A tela que o usuário abre no navegador",
           "estado": "ok",
-          "tempoRespostaMs": 77,
+          "tempoRespostaMs": 68,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-10-17T19:06:50.227Z",
+          "verificadoEm": "2026-10-17T21:38:56.017Z",
           "desde": "2026-09-23T04:35:08.040Z",
           "historico": [
             {
@@ -1966,7 +1966,7 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -1978,10 +1978,10 @@
           "nome": "API",
           "descricao": "Serviço que atende o sistema de assistência técnica",
           "estado": "ok",
-          "tempoRespostaMs": 410,
+          "tempoRespostaMs": 415,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-10-17T19:06:50.638Z",
+          "verificadoEm": "2026-10-17T21:38:56.433Z",
           "desde": "2026-09-23T04:35:08.558Z",
           "historico": [
             {
@@ -2130,7 +2130,7 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -2151,10 +2151,10 @@
           "nome": "Aplicação web",
           "descricao": "A tela que o usuário abre no navegador",
           "estado": "ok",
-          "tempoRespostaMs": 63,
+          "tempoRespostaMs": 61,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-10-17T19:06:50.702Z",
+          "verificadoEm": "2026-10-17T21:38:56.495Z",
           "desde": "2026-09-23T04:35:08.765Z",
           "historico": [
             {
@@ -2303,7 +2303,7 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -2315,10 +2315,10 @@
           "nome": "API",
           "descricao": "Serviço que atende o sistema de assistência técnica",
           "estado": "ok",
-          "tempoRespostaMs": 403,
+          "tempoRespostaMs": 404,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-10-17T19:06:51.107Z",
+          "verificadoEm": "2026-10-17T21:38:56.900Z",
           "desde": "2026-09-23T04:35:09.302Z",
           "historico": [
             {
@@ -2467,7 +2467,7 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -2479,10 +2479,10 @@
           "nome": "Agendamento",
           "descricao": "Onde o cliente agenda o atendimento",
           "estado": "ok",
-          "tempoRespostaMs": 593,
+          "tempoRespostaMs": 605,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-10-17T19:06:51.701Z",
+          "verificadoEm": "2026-10-17T21:38:57.507Z",
           "desde": "2026-09-23T04:35:10.115Z",
           "historico": [
             {
@@ -2631,7 +2631,7 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -2643,10 +2643,10 @@
           "nome": "Atendimento presencial",
           "descricao": "Retirada de senha na unidade",
           "estado": "ok",
-          "tempoRespostaMs": 600,
+          "tempoRespostaMs": 583,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-10-17T19:06:52.302Z",
+          "verificadoEm": "2026-10-17T21:38:58.090Z",
           "desde": "2026-09-23T04:35:10.930Z",
           "historico": [
             {
@@ -2795,7 +2795,7 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -2807,10 +2807,10 @@
           "nome": "Atendentes",
           "descricao": "Tela de quem chama a próxima senha",
           "estado": "ok",
-          "tempoRespostaMs": 604,
+          "tempoRespostaMs": 598,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-10-17T19:06:52.907Z",
+          "verificadoEm": "2026-10-17T21:38:58.690Z",
           "desde": "2026-09-23T04:35:11.738Z",
           "historico": [
             {
@@ -2959,7 +2959,7 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
@@ -2974,7 +2974,7 @@
           "tempoRespostaMs": 125,
           "detalhe": null,
           "falhasSeguidas": 0,
-          "verificadoEm": "2026-10-17T19:06:53.033Z",
+          "verificadoEm": "2026-10-17T21:38:58.815Z",
           "desde": "2026-09-23T04:35:11.911Z",
           "historico": [
             {
@@ -3123,7 +3123,7 @@
             },
             {
               "dia": "2026-10-17",
-              "verificacoes": 3,
+              "verificacoes": 4,
               "falhas": 0,
               "degradado": 0
             }
