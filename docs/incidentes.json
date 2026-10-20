@@ -5,7 +5,7 @@
       "componente": "dev-gdf-api",
       "titulo": "Gerenciador de Fila: API indisponível — Desenvolvimento",
       "inicio": "2026-10-06T00:55:18.648Z",
-      "ultimoMotivo": "sem resposta no tempo limite",
+      "ultimoMotivo": "nao respondeu",
       "atualizacoes": [
         {
           "situacao": "Detectado",
@@ -16,6 +16,11 @@
           "situacao": "Atualização",
           "texto": "O motivo da falha mudou: sem resposta no tempo limite.",
           "quando": "2026-10-20T19:04:07.068Z"
+        },
+        {
+          "situacao": "Atualização",
+          "texto": "O motivo da falha mudou: nao respondeu.",
+          "quando": "2026-10-20T22:32:47.228Z"
         }
       ]
     },
